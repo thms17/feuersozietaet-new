@@ -1,0 +1,18 @@
+@keyframes glowPulse {
+  0% {
+    opacity: 0.13;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.18;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 0.13;
+    transform: scale(1);
+  }
+}
+
+.team_image-background-blur {
+  animation: glowPulse 2s infinite alternate ease-in-out;
+}

@@ -2,3 +2,8 @@
   display: none;
   opacity: 0;
 }
+
+[formular='subnit-btn'] {
+  display: none;
+  opacity: 0;
+}
