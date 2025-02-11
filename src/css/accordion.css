@@ -1,0 +1,3 @@
+[accordion='wrapper'] > :last-child {
+  border: none;
+}
