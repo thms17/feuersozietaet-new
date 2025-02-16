@@ -1,47 +1,54 @@
 import gsap from 'gsap';
 
-// Button & Panel über Attribute targetieren
-const button = document.querySelector('[button-more-info="zahn"]');
-const panel = document.querySelector('[tab-content-more-info="zahn"]');
+function initMoreInfoToggles() {
+  const buttons = document.querySelectorAll('[button-more-info]');
 
-if (button && panel) {
-  // Initiale ARIA-Attribute setzen
-  button.setAttribute('aria-expanded', 'false');
-  panel.setAttribute('aria-hidden', 'true');
-  panel.style.display = 'none';
+  buttons.forEach((button) => {
+    const targetValue = button.getAttribute('button-more-info');
+    const panel = document.querySelector(`[tab-content-more-info="${targetValue}"]`);
 
-  button.addEventListener('click', () => {
-    const isExpanded = button.getAttribute('aria-expanded') === 'true';
-    const duration = 0.5;
-    const ease = 'power2.inOut';
+    if (!panel) return;
 
-    if (isExpanded) {
-      // Panel ausblenden
-      button.setAttribute('aria-expanded', 'false');
-      button.textContent = 'Mehr erfahren'; // Button-Text zurücksetzen
-      panel.setAttribute('aria-hidden', 'true');
+    // Initiale ARIA-Attribute setzen
+    button.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('aria-hidden', 'true');
+    panel.style.display = 'none';
 
-      gsap.to(panel, {
-        height: 0,
-        autoAlpha: 0,
-        duration,
-        ease,
-        onComplete: () => {
-          panel.style.display = 'none';
-        },
-      });
-    } else {
-      // Panel einblenden
-      button.setAttribute('aria-expanded', 'true');
-      button.textContent = 'Informationen schließen'; // Button-Text ändern
-      panel.setAttribute('aria-hidden', 'false');
-      panel.style.display = 'grid'; // Panel auf grid setzen
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const duration = 0.5;
+      const ease = 'power2.inOut';
 
-      gsap.fromTo(
-        panel,
-        { height: 0, autoAlpha: 0 },
-        { height: 'auto', autoAlpha: 1, duration, ease }
-      );
-    }
+      if (isExpanded) {
+        // Panel ausblenden
+        button.setAttribute('aria-expanded', 'false');
+        button.textContent = 'Mehr erfahren'; // Button-Text zurücksetzen
+        panel.setAttribute('aria-hidden', 'true');
+
+        gsap.to(panel, {
+          height: 0,
+          autoAlpha: 0,
+          duration,
+          ease,
+          onComplete: () => {
+            panel.style.display = 'none';
+          },
+        });
+      } else {
+        // Panel einblenden
+        button.setAttribute('aria-expanded', 'true');
+        button.textContent = 'Informationen schließen'; // Button-Text ändern
+        panel.setAttribute('aria-hidden', 'false');
+        panel.style.display = 'block'; // Panel auf grid setzen
+
+        gsap.fromTo(
+          panel,
+          { height: 0, autoAlpha: 0 },
+          { height: 'auto', autoAlpha: 1, duration, ease }
+        );
+      }
+    });
   });
 }
+
+initMoreInfoToggles();

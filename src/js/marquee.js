@@ -22,4 +22,4 @@ function moveMarquee() {
   });
 }
 
-setInterval(moveMarquee, 2000); // Alle 2 Sekunden
+setInterval(moveMarquee, 7000); // Alle 2 Sekunden
