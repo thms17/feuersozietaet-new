@@ -5,26 +5,46 @@ const background = document.querySelector('[tabs-nav="background"]');
 const tabs = Array.from(menuWrapper?.children || []);
 
 if (menuWrapper && background && tabs.length) {
-  console.log('Tabs gefunden:', tabs.length);
+  function getRows() {
+    const rows = [];
 
-  // Setze das Background-Element initial auf das erste Tab
-  gsap.set(background, { xPercent: 0, yPercent: 0 });
+    tabs.forEach((tab) => {
+      const tabTop = tab.getBoundingClientRect().top;
+      let row = rows.find((r) => Math.abs(r[0].getBoundingClientRect().top - tabTop) < 5);
 
-  tabs.forEach((tab, index) => {
+      if (!row) {
+        row = [];
+        rows.push(row);
+      }
+
+      row.push(tab);
+    });
+
+    return rows;
+  }
+
+  function getRemValue(multiplier = 1) {
+    return parseFloat(getComputedStyle(document.documentElement).fontSize) * multiplier;
+  }
+
+  gsap.set(background, { x: 0, y: 0 });
+
+  tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
-      const firstTabTop = tabs[0].offsetTop; // Y-Position des ersten Tabs
-      const currentTabTop = tab.offsetTop; // Y-Position des angeklickten Tabs
+      const rows = getRows();
+      const rowIndex = rows.findIndex((row) => row.includes(tab));
+      const colIndex = rows[rowIndex].indexOf(tab);
 
-      const rowIndex = currentTabTop === firstTabTop ? 0 : 1; // 0 = erste Reihe, 1 = zweite Reihe
+      const xOffset = colIndex * 100;
+      const tabHeight = tabs[0].offsetHeight;
+      const yOffset = rowIndex * (tabHeight + getRemValue(1));
 
       gsap.to(background, {
-        xPercent: index * 100, // Horizontal verschieben
-        yPercent: rowIndex * 100, // Falls zweite Reihe, vertikal verschieben
+        xPercent: xOffset,
+        y: yOffset,
         duration: 0.4,
         ease: 'power2.out',
       });
     });
   });
-} else {
-  console.warn('Tabs oder Background nicht gefunden.');
 }
