@@ -8,7 +8,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 const swiper = new Swiper('.swiper', {
   modules: [Autoplay, Pagination],
   slidesPerView: 3,
-  spaceBetween: 30,
+  spaceBetween: 32, // Standardwert
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
@@ -20,4 +20,12 @@ const swiper = new Swiper('.swiper', {
   },
   loop: true,
   speed: 800,
+  breakpoints: {
+    768: {
+      spaceBetween: 16, // Von 768px bis 991px
+    },
+    992: {
+      spaceBetween: 32, // Ab 992px wieder auf 32px
+    },
+  },
 });

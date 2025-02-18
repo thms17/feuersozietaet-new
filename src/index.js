@@ -9,4 +9,5 @@ import './js/accordion';
 import './js/marquee';
 import './js/more-info-content';
 import './js/review-swiper';
+import './js/tabs-background-move';
 // import './css/marquee.css';
