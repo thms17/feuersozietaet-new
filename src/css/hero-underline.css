@@ -1,0 +1,21 @@
+.highlight_underscore {
+  position: relative;
+  display: inline-block;
+}
+
+.highlight_underscore::after {
+  content: '';
+  position: absolute;
+  width: 106%;
+  bottom: -0.625rem;
+  left: -0.5rem;
+  height: 0.75rem;
+
+  /* Damit die Linie hinter dem Text bleibt */
+  z-index: -1;
+
+  /* SVG als Hintergrundbild */
+  background-image: url('https://cdn.prod.website-files.com/675d61412f925ccc8e6f2773/67a2a6ee82f6b7f5cb8dfcc0_Vector.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
