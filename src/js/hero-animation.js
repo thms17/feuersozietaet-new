@@ -25,7 +25,7 @@ function animateHeroSection() {
 
   // 2️⃣ Underline **erscheint nach der Headline, aber ohne Verzögerung**
   if (heroUnderline) {
-    tl.fromTo(heroUnderline, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.3');
+    tl.fromTo(heroUnderline, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4');
   }
 
   // 3️⃣ Subheadline mit sanftem Fade-in und Y-Versatz
@@ -35,7 +35,12 @@ function animateHeroSection() {
 
   // 4️⃣ Menu-Wrapper zuerst animieren (von unten nach oben)
   if (heroMenuWrapper) {
-    tl.fromTo(heroMenuWrapper, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3 }, '-=0.2');
+    tl.fromTo(
+      heroMenuWrapper,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.3, ease: 'back.out(1.9)' },
+      '-=0.2'
+    );
   }
 
   // 5️⃣ Tabs animieren mit Back.easeOut und Y-Shift
