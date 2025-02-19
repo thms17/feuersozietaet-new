@@ -19,7 +19,7 @@ function animateHeroSection() {
       opacity: 0,
       y: 10,
       stagger: 0.03,
-      duration: 0.4,
+      duration: 0.35,
     });
   }
 
@@ -35,12 +35,21 @@ function animateHeroSection() {
 
   // 4️⃣ Menu-Wrapper zuerst animieren (von unten nach oben)
   if (heroMenuWrapper) {
-    tl.fromTo(heroMenuWrapper, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 });
+    tl.fromTo(
+      heroMenuWrapper,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+      '-=0.2'
+    );
   }
 
-  // 5️⃣ Tabs animieren, aber erst nach dem Menu-Wrapper
+  // 5️⃣ Tabs animieren mit Back.easeOut und Y-Shift
   if (heroTabs.length) {
-    tl.fromTo(heroTabs, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.1 });
+    tl.fromTo(
+      heroTabs,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, stagger: 0.1, ease: 'back.out(1.7)' } // Kleinere Intensität für mehr Sichtbarkeit
+    );
   }
 
   // 6️⃣ Inhaltsboxen mit Blur-Effekt einblenden **Gleichzeitig mit Navbar**
