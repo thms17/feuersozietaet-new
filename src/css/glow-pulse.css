@@ -16,3 +16,8 @@
 .team_image-background-blur {
   animation: glowPulse 2s infinite alternate ease-in-out;
 }
+
+.team_image-background-blur {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}

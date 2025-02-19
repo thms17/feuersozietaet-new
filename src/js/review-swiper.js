@@ -21,11 +21,21 @@ const swiper = new Swiper('.swiper', {
   loop: true,
   speed: 800,
   breakpoints: {
+    0: {
+      slidesPerView: 1,
+      spaceBetween: 16,
+    },
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 16,
+    },
     768: {
-      spaceBetween: 16, // Von 768px bis 991px
+      slidesPerView: 3, // Ab 768px wieder drei Slides
+      spaceBetween: 16,
     },
     992: {
-      spaceBetween: 32, // Ab 992px wieder auf 32px
+      slidesPerView: 3,
+      spaceBetween: 32,
     },
   },
 });

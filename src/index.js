@@ -10,4 +10,5 @@ import './js/marquee';
 import './js/more-info-content';
 import './js/review-swiper';
 import './js/tabs-background-move';
+import './js/move-to-tabs';
 // import './css/marquee.css';
