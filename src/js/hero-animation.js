@@ -10,7 +10,7 @@ function animateHeroSection() {
   const heroNavbar = document.querySelector('[hero-animation="navbar"]');
   const heroUnderline = document.querySelector('.highlight_underscore');
 
-  const tl = gsap.timeline({ defaults: { ease: 'power2.out', duration: 0.5 } });
+  const tl = gsap.timeline({ defaults: { ease: 'back.out(1.7)', duration: 0.5 } });
 
   // 1️⃣ Headline mit SplitText animieren
   if (heroHeading) {
@@ -25,22 +25,17 @@ function animateHeroSection() {
 
   // 2️⃣ Underline **erscheint nach der Headline, aber ohne Verzögerung**
   if (heroUnderline) {
-    tl.fromTo(heroUnderline, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.5 }, '-=0.4');
+    tl.fromTo(heroUnderline, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.3');
   }
 
   // 3️⃣ Subheadline mit sanftem Fade-in und Y-Versatz
   if (heroSubtitle) {
-    tl.from(heroSubtitle, { opacity: 0, y: 20 }, '-=0.3');
+    tl.from(heroSubtitle, { opacity: 0, y: 10 }, '-=0.3');
   }
 
   // 4️⃣ Menu-Wrapper zuerst animieren (von unten nach oben)
   if (heroMenuWrapper) {
-    tl.fromTo(
-      heroMenuWrapper,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-      '-=0.2'
-    );
+    tl.fromTo(heroMenuWrapper, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3 }, '-=0.2');
   }
 
   // 5️⃣ Tabs animieren mit Back.easeOut und Y-Shift
@@ -48,23 +43,31 @@ function animateHeroSection() {
     tl.fromTo(
       heroTabs,
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, stagger: 0.1, ease: 'back.out(1.7)' } // Kleinere Intensität für mehr Sichtbarkeit
+      { opacity: 1, y: 0, stagger: 0.1, duration: 0.1, ease: 'back' },
+      '-=0.15' // Kleinere Intensität für mehr Sichtbarkeit
     );
   }
 
   // 6️⃣ Inhaltsboxen mit Blur-Effekt einblenden **Gleichzeitig mit Navbar**
   if (heroContent.length && heroNavbar) {
-    tl.addLabel('contentAndNavbar') // Label für Synchronisation
+    tl.addLabel('contentAndNavbar', '+=0.07') // Label für Synchronisation
       .fromTo(
         heroContent,
         { opacity: 0, filter: 'blur(10px)', y: 15 },
-        { opacity: 1, filter: 'blur(0px)', y: 0, stagger: 0.15 },
+        {
+          opacity: 1,
+          filter: 'blur(0px)',
+          y: 0,
+          stagger: 0.15,
+          duration: 0.9,
+          ease: 'back.out(2)',
+        },
         'contentAndNavbar'
       )
       .fromTo(
         heroNavbar,
         { opacity: 0, filter: 'blur(10px)', y: -15 },
-        { opacity: 1, filter: 'blur(0px)', y: 0 },
+        { opacity: 1, filter: 'blur(0px)', y: 0, duration: 0.9, ease: 'back.out(2)' },
         'contentAndNavbar'
       );
   }
