@@ -1,0 +1,22 @@
+.navbar_link {
+  position: relative;
+}
+
+.navbar_link::before {
+  content: '';
+  position: absolute;
+  width: calc(100% - 1rem); /* Zieht das Padding (0.5rem links & rechts) ab */
+  height: 2px;
+  border-radius: 2px;
+  background-color: #2a2a2a;
+  bottom: 4px;
+  left: 0.5rem; /* Startet nach dem linken Padding */
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar_link:hover::before {
+  transform-origin: left;
+  transform: scaleX(1);
+}
