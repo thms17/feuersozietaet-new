@@ -25,25 +25,37 @@ formContainers.forEach((formContainer) => {
 
     // **Submit-Button nur im letzten Step anzeigen**
     if (index === steps.length - 1) {
-      submitBtn.style.display = 'block';
+      submitBtn.style.visibility = 'visible';
+      submitBtn.setAttribute('aria-hidden', 'false');
       gsap.to(submitBtn, { opacity: 1, duration: 0.5 });
     } else {
       gsap.to(submitBtn, {
         opacity: 0,
         duration: 0.3,
-        onComplete: () => (submitBtn.style.display = 'none'),
+        onComplete: () => {
+          submitBtn.style.visibility = 'hidden';
+          submitBtn.setAttribute('aria-hidden', 'true');
+        },
       });
     }
 
     // **Back-Button nur anzeigen, wenn nicht im ersten Step**
     if (index > 0) {
-      backBtn.style.display = 'block';
+      backBtn.style.visibility = 'visible';
+      backBtn.setAttribute('aria-hidden', 'false');
+      backBtn.setAttribute('aria-disabled', 'false');
+      backBtn.setAttribute('tabindex', '0');
       gsap.to(backBtn, { opacity: 1, duration: 0.5 });
     } else {
       gsap.to(backBtn, {
         opacity: 0,
         duration: 0.3,
-        onComplete: () => (backBtn.style.display = 'none'),
+        onComplete: () => {
+          backBtn.style.visibility = 'hidden';
+          backBtn.setAttribute('aria-hidden', 'true');
+          backBtn.setAttribute('aria-disabled', 'true');
+          backBtn.setAttribute('tabindex', '-1');
+        },
       });
     }
   }
@@ -93,7 +105,7 @@ formContainers.forEach((formContainer) => {
     }
   });
 
-  // **Rückwärts-Navigation nur innerhalb des jeweiligen Formulars**
+  // **Rückwärts-Navigation (barrierefrei)**
   backBtn.addEventListener('click', (event) => {
     event.preventDefault();
 
@@ -114,7 +126,12 @@ formContainers.forEach((formContainer) => {
   });
 
   // **Starte mit Step 1 und verstecke Buttons**
-  submitBtn.style.display = 'none';
-  backBtn.style.display = 'none';
+  submitBtn.style.visibility = 'hidden';
+  submitBtn.setAttribute('aria-hidden', 'true');
+  backBtn.style.visibility = 'hidden';
+  backBtn.setAttribute('aria-hidden', 'true');
+  backBtn.setAttribute('aria-disabled', 'true');
+  backBtn.setAttribute('tabindex', '-1');
+
   showStep(currentStepIndex);
 });
