@@ -19,13 +19,13 @@ function animateHeroSection() {
       opacity: 0,
       y: 10,
       stagger: 0.03,
-      duration: 0.35,
+      duration: 0.3,
     });
   }
 
   // 2️⃣ Underline **erscheint nach der Headline, aber ohne Verzögerung**
   if (heroUnderline) {
-    tl.fromTo(heroUnderline, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4');
+    tl.fromTo(heroUnderline, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.5');
   }
 
   // 3️⃣ Subheadline mit sanftem Fade-in und Y-Versatz
@@ -39,7 +39,7 @@ function animateHeroSection() {
       heroMenuWrapper,
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 0.3, ease: 'back.out(1.9)' },
-      '-=0.2'
+      '-=0.25'
     );
   }
 
@@ -49,13 +49,13 @@ function animateHeroSection() {
       heroTabs,
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, stagger: 0.1, duration: 0.1, ease: 'back' },
-      '-=0.15' // Kleinere Intensität für mehr Sichtbarkeit
+      '-=0.2' // Kleinere Intensität für mehr Sichtbarkeit
     );
   }
 
   // 6️⃣ Inhaltsboxen mit Blur-Effekt einblenden **Gleichzeitig mit Navbar**
   if (heroContent.length && heroNavbar) {
-    tl.addLabel('contentAndNavbar', '+=0.07') // Label für Synchronisation
+    tl.addLabel('contentAndNavbar', '-=0.1') // Label für Synchronisation
       .fromTo(
         heroContent,
         { opacity: 0, filter: 'blur(10px)', y: 15 },
