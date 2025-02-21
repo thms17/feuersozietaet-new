@@ -37,7 +37,7 @@ function animateHeroSection() {
     opacity: 0,
     y: 10,
     stagger: 0.03,
-    duration: 0.3,
+    duration: 0.25,
   });
 
   // 2️⃣ Underline **erscheint nach der Headline, aber ohne Verzögerung**
